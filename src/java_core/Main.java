@@ -2,17 +2,18 @@ package java_core;
 
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
 import static java.lang.Math.pow;
-import static java_core.FanInc.motor;
 
 
 public class Main extends Application {
@@ -39,9 +40,30 @@ public class Main extends Application {
         HBox root = new HBox();
         Scene scene = new Scene(root, 700, 500);
 
-        Text text = new Text(motor.toString());
+        TextField form = new TextField();
+        TextField expense = new TextField();
+        TextField pressure = new TextField();
+        TextField form2 = new TextField();
+        TextField expense2 = new TextField();
+        TextField pressure2 = new TextField();
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(2);
+        grid.setHgap(2);
+        root.getChildren().addAll(form, expense, pressure, form2, expense2, pressure2);
+        stage.setScene(scene);
+        stage.show();
+
+        Button clear = new Button("Clear");
+        GridPane.setConstraints(clear, 1, 1);
+        root.getChildren().add(clear);
+
+        //  chart(stage, root, scene);
 
 
+    }
+
+    private void chart(Stage stage, HBox root, Scene scene) {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Расход");
 
@@ -59,16 +81,11 @@ public class Main extends Application {
         root.getChildren().add(lineChart);
 
         stage.setTitle("LineChart");
-        stage.setScene(scene);
-        stage.show();
-        root.getChildren().add(text);
-
-
 
     }
 
     private void equation(XYChart.Series data) {
-        for (int i = 0; i < 3000; i=i+200) {
+        for (int i = 0; i < 3000; i = i + 100) {
             q=i;
             double p=a+b*q+c*pow(q,2)+d*pow(q,3);
 
